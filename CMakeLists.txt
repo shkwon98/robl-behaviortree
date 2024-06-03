@@ -11,7 +11,7 @@ set(CMAKE_BUILD_TYPE Debug)
 include(cmake/external/behaviortree_cpp.cmake)
 include(cmake/external/libarchive.cmake)
 
-### robl-behaviortree::filesystem ###
+### robl::behaviortree_filesystem ###
 file(GLOB_RECURSE filesystem_sources CONFIGURE_DEPENDS src/filesystem/*.cpp)
 add_library(robl-behaviortree-filesystem SHARED)
 target_sources(robl-behaviortree-filesystem
@@ -24,9 +24,9 @@ set_target_properties(robl-behaviortree-filesystem
     PROPERTIES
         INSTALL_RPATH "$ORIGIN"
         COMPILE_DEFINITIONS BT_PLUGIN_EXPORT)
-add_library(robl-behaviortree::filesystem ALIAS robl-behaviortree-filesystem)
+add_library(robl::behaviortree_filesystem ALIAS robl-behaviortree-filesystem)
 
-### robl-behaviortree::archive ###
+### robl::behaviortree_archive ###
 file(GLOB_RECURSE archive_sources CONFIGURE_DEPENDS src/archive/*.cpp)
 add_library(robl-behaviortree-archive SHARED)
 target_sources(robl-behaviortree-archive
@@ -40,20 +40,20 @@ set_target_properties(robl-behaviortree-archive
     PROPERTIES
         INSTALL_RPATH "$ORIGIN"
         COMPILE_DEFINITIONS BT_PLUGIN_EXPORT)
-add_library(robl-behaviortree::archive ALIAS robl-behaviortree-archive)
+add_library(robl::behaviortree_archive ALIAS robl-behaviortree-archive)
 
-### robl-behaviortree::robl-behaviortree ###
+### robl::behaviortree ###
 add_library(robl-behaviortree INTERFACE)
 target_link_libraries(robl-behaviortree
-    INTERFACE robl-behaviortree::filesystem
-              robl-behaviortree::archive)
-add_library(robl-behaviortree::robl-behaviortree ALIAS robl-behaviortree)
+    INTERFACE robl::behaviortree_filesystem
+              robl::behaviortree_archive)
+add_library(robl::behaviortree ALIAS robl-behaviortree)
 
 
 ### install ###
-install(TARGETS robl-behaviortree
-                robl-behaviortree-filesystem
+install(TARGETS robl-behaviortree-filesystem
                 robl-behaviortree-archive
+                robl-behaviortree
         EXPORT robl-behaviortree-targets
         ARCHIVE DESTINATION lib
         LIBRARY DESTINATION lib
