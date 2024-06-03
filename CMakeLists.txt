@@ -42,17 +42,34 @@ set_target_properties(robl-behaviortree-archive
         COMPILE_DEFINITIONS BT_PLUGIN_EXPORT)
 add_library(robl::behaviortree_archive ALIAS robl-behaviortree-archive)
 
+### robl::behaviortree_logger ###
+file(GLOB_RECURSE logger_sources CONFIGURE_DEPENDS src/logger/*.cpp)
+add_library(robl-behaviortree-logger SHARED)
+target_sources(robl-behaviortree-logger
+    PRIVATE ${logger_sources})
+target_include_directories(robl-behaviortree-logger
+    PUBLIC  include)
+target_link_libraries(robl-behaviortree-logger
+    PUBLIC  BT::behaviortree_cpp)
+set_target_properties(robl-behaviortree-logger
+    PROPERTIES
+        INSTALL_RPATH "$ORIGIN"
+        COMPILE_DEFINITIONS BT_PLUGIN_EXPORT)
+add_library(robl::behaviortree_logger ALIAS robl-behaviortree-logger)
+
 ### robl::behaviortree ###
 add_library(robl-behaviortree INTERFACE)
 target_link_libraries(robl-behaviortree
     INTERFACE robl::behaviortree_filesystem
-              robl::behaviortree_archive)
+              robl::behaviortree_archive
+                robl::behaviortree_logger)
 add_library(robl::behaviortree ALIAS robl-behaviortree)
 
 
 ### install ###
 install(TARGETS robl-behaviortree-filesystem
                 robl-behaviortree-archive
+                robl-behaviortree-logger
                 robl-behaviortree
         EXPORT robl-behaviortree-targets
         ARCHIVE DESTINATION lib
