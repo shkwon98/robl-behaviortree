@@ -51,10 +51,13 @@ add_library(robl_behavior_tree::robl_behavior_tree ALIAS robl_behavior_tree)
 
 
 ### install ###
-install(TARGETS robl_behavior_tree-filesystem
-                robl_behavior_tree-archive
-                robl_behavior_tree
+install(TARGETS robl_behavior_tree
         EXPORT robl_behavior_tree-targets
+        ARCHIVE DESTINATION lib
         LIBRARY DESTINATION lib
-        INCLUDES DESTINATION include)
+        RUNTIME DESTINATION bin)
+
+install(DIRECTORY include/robl_behavior_tree
+        DESTINATION include
+        FILES_MATCHING PATTERN "*.h*")
 
