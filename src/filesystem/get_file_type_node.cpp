@@ -3,16 +3,17 @@
 namespace robl_behavior_tree
 {
 
-BT::NodeStatus GetFileType::tick()
+BT::NodeStatus GetFileTypeNode::tick()
 {
-    auto path = getInput<std::string>("file");
-    if (!path)
+    std::string path;
+
+    if (!getInput("file", path))
     {
-        throw BT::RuntimeError("missing required input [path]: ", path.error());
+        throw BT::RuntimeError("missing required input [path]");
     }
 
     // get file type
-    auto type = std::filesystem::status(path.value()).type();
+    auto type = std::filesystem::status(path).type();
 
     switch (type)
     {

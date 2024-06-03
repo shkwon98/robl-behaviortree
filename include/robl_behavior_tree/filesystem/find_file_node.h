@@ -8,10 +8,11 @@
 namespace robl_behavior_tree
 {
 
-class FindFile : public BT::SyncActionNode
+// This is a synchronous operation
+class FindFileNode : public BT::SyncActionNode
 {
 public:
-    FindFile(const std::string &name, const BT::NodeConfig &config)
+    FindFileNode(const std::string &name, const BT::NodeConfig &config)
         : BT::SyncActionNode(name, config)
     {
     }
@@ -22,8 +23,9 @@ public:
                  BT::OutputPort<std::vector<std::string>>("files") };
     }
 
-private:
     BT::NodeStatus tick() override;
+
+private:
 };
 
 } // namespace robl_behavior_tree

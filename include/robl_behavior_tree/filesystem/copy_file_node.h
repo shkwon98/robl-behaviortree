@@ -7,10 +7,11 @@
 namespace robl_behavior_tree
 {
 
-class CopyFile : public BT::SyncActionNode
+// This is a synchronous operation
+class CopyFileNode : public BT::SyncActionNode
 {
 public:
-    CopyFile(const std::string &name, const BT::NodeConfig &config)
+    CopyFileNode(const std::string &name, const BT::NodeConfig &config)
         : BT::SyncActionNode(name, config)
     {
     }
@@ -21,8 +22,9 @@ public:
                  BT::OutputPort<std::string>("output") };
     }
 
-private:
     BT::NodeStatus tick() override;
+
+private:
 };
 
 } // namespace robl_behavior_tree

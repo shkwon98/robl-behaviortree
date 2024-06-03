@@ -3,49 +3,50 @@
 namespace robl_behavior_tree
 {
 
-BT::NodeStatus FindFile::tick()
+BT::NodeStatus FindFileNode::tick()
 {
-    auto path = getInput<std::string>("path");
-    auto expression = getInput<std::string>("expression");
-    if (!path)
+    std::string path;
+    std::string expression;
+
+    if (!getInput("path", path))
     {
-        throw BT::RuntimeError("missing required input [path]: ", path.error());
+        throw BT::RuntimeError("missing required input [path]");
     }
-    if (!expression)
+    if (!getInput("expression", expression))
     {
-        throw BT::RuntimeError("missing required input [expression]: ", expression.error());
+        throw BT::RuntimeError("missing required input [expression]");
     }
 
-    if (!std::filesystem::exists(path.value()))
+    if (!std::filesystem::exists(path))
     {
-        throw BT::RuntimeError("path does not exist: ", path.value());
+        throw BT::RuntimeError("path does not exist: ", path);
     }
 
     // Find files that match the expression in the given path
     // path can be a directory or a file
     std::vector<std::string> files;
-    if (std::filesystem::is_directory(path.value()))
+    if (std::filesystem::is_directory(path))
     {
-        for (const auto &entry : std::filesystem::directory_iterator(path.value()))
+        for (const auto &entry : std::filesystem::directory_iterator(path))
         {
             if (entry.is_regular_file())
             {
                 auto filepath = entry.path().string();
                 auto filename = entry.path().filename().string();
 
-                if (std::regex_match(filename, std::regex(expression.value())))
+                if (std::regex_match(filename, std::regex(expression)))
                 {
                     files.push_back(filepath);
                 }
             }
         }
     }
-    else if (std::filesystem::is_regular_file(path.value()))
+    else if (std::filesystem::is_regular_file(path))
     {
-        auto filename = std::filesystem::path(path.value()).filename().string();
-        if (std::regex_match(filename, std::regex(expression.value())))
+        auto filename = std::filesystem::path(path).filename().string();
+        if (std::regex_match(filename, std::regex(expression)))
         {
-            files.push_back(path.value());
+            files.push_back(path);
         }
     }
 

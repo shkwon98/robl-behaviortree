@@ -3,25 +3,25 @@
 namespace robl_behavior_tree
 {
 
-BT::NodeStatus CopyFile::tick()
+BT::NodeStatus CopyFileNode::tick()
 {
-    auto src = getInput<std::string>("src");
-    auto dest = getInput<std::string>("dest");
+    std::string src;
+    std::string dest;
 
-    if (!src)
+    if (!getInput("src", src))
     {
-        throw BT::RuntimeError("missing required input [src]: ", src.error());
+        throw BT::RuntimeError("missing required input [src]");
     }
-    if (!dest)
+    if (!getInput("dest", dest))
     {
-        throw BT::RuntimeError("missing required input [dest]: ", dest.error());
+        throw BT::RuntimeError("missing required input [dest]");
     }
 
-    std::filesystem::copy(src.value(), dest.value(), std::filesystem::copy_options::update_existing);
+    std::filesystem::copy(src, dest, std::filesystem::copy_options::update_existing);
 
-    auto output = (std::filesystem::path(dest.value()) / std::filesystem::path(src.value()).filename()).string();
+    auto output = (std::filesystem::path(dest) / std::filesystem::path(src).filename()).string();
 
-    std::cout << "Copied " << src.value() << " to " << output << std::endl;
+    std::cout << "Copied " << src << " to " << output << std::endl;
 
     setOutput("output", output);
     return BT::NodeStatus::SUCCESS;

@@ -6,7 +6,7 @@
 
 BT_REGISTER_NODES(factory)
 {
-    factory.registerNodeType<robl_behavior_tree::CopyFile>("CopyFile");
-    factory.registerNodeType<robl_behavior_tree::FindFile>("FindFile");
-    factory.registerNodeType<robl_behavior_tree::GetFileType>("GetFileType");
+    factory.registerNodeType<robl_behavior_tree::CopyFileNode>("CopyFile");
+    factory.registerNodeType<robl_behavior_tree::FindFileNode>("FindFile");
+    factory.registerNodeType<robl_behavior_tree::GetFileTypeNode>("GetFileType");
 }

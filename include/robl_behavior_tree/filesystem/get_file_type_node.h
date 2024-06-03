@@ -8,10 +8,11 @@
 namespace robl_behavior_tree
 {
 
-class GetFileType : public BT::SyncActionNode
+// This is a synchronous operation
+class GetFileTypeNode : public BT::SyncActionNode
 {
 public:
-    GetFileType(const std::string &name, const BT::NodeConfig &config)
+    GetFileTypeNode(const std::string &name, const BT::NodeConfig &config)
         : BT::SyncActionNode(name, config)
     {
     }
@@ -21,8 +22,9 @@ public:
         return { BT::InputPort<std::string>("file"), BT::OutputPort<std::string>("type") };
     }
 
-private:
     BT::NodeStatus tick() override;
+
+private:
 };
 
 } // namespace robl_behavior_tree
