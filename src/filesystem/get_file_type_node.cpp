@@ -1,6 +1,6 @@
-#include "robl_behavior_tree/filesystem/get_file_type_node.h"
+#include "robl_behaviortree/filesystem/get_file_type_node.h"
 
-namespace robl_behavior_tree
+namespace robl_behaviortree
 {
 
 BT::NodeStatus GetFileTypeNode::tick()
@@ -52,4 +52,4 @@ BT::NodeStatus GetFileTypeNode::tick()
     return BT::NodeStatus::SUCCESS;
 }
 
-} // namespace robl_behavior_tree
+} // namespace robl_behaviortree

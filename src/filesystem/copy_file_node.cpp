@@ -1,6 +1,6 @@
-#include "robl_behavior_tree/filesystem/copy_file_node.h"
+#include "robl_behaviortree/filesystem/copy_file_node.h"
 
-namespace robl_behavior_tree
+namespace robl_behaviortree
 {
 
 BT::NodeStatus CopyFileNode::tick()
@@ -27,4 +27,4 @@ BT::NodeStatus CopyFileNode::tick()
     return BT::NodeStatus::SUCCESS;
 }
 
-} // namespace robl_behavior_tree
+} // namespace robl_behaviortree

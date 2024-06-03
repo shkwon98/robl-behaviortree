@@ -6,7 +6,7 @@
 
 #include <behaviortree_cpp/action_node.h>
 
-namespace robl_behavior_tree
+namespace robl_behaviortree
 {
 
 // This is an asynchronous operation
@@ -35,4 +35,4 @@ private:
     std::future<bool> future_;
 };
 
-} // namespace robl_behavior_tree
+} // namespace robl_behaviortree

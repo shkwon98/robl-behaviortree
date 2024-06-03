@@ -1,11 +1,11 @@
-#include "robl_behavior_tree/archive/extract_archive_node.h"
+#include "robl_behaviortree/archive/extract_archive_node.h"
 
 #include <archive.h>
 #include <archive_entry.h>
 
 #include <behaviortree_cpp/bt_factory.h>
 
-namespace robl_behavior_tree
+namespace robl_behaviortree
 {
 
 BT::NodeStatus ExtractArchiveNode::onStart()
@@ -153,4 +153,4 @@ bool ExtractArchiveNode::ExtractGzip(const std::string &filename)
     return true;
 }
 
-} // namespace robl_behavior_tree
+} // namespace robl_behaviortree

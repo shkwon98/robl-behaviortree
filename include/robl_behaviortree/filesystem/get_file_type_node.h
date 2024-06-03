@@ -5,7 +5,7 @@
 
 #include <behaviortree_cpp/action_node.h>
 
-namespace robl_behavior_tree
+namespace robl_behaviortree
 {
 
 // This is a synchronous operation
@@ -27,4 +27,4 @@ public:
 private:
 };
 
-} // namespace robl_behavior_tree
+} // namespace robl_behaviortree

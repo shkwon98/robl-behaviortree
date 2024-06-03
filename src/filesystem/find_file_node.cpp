@@ -1,6 +1,6 @@
-#include "robl_behavior_tree/filesystem/find_file_node.h"
+#include "robl_behaviortree/filesystem/find_file_node.h"
 
-namespace robl_behavior_tree
+namespace robl_behaviortree
 {
 
 BT::NodeStatus FindFileNode::tick()
@@ -59,4 +59,4 @@ BT::NodeStatus FindFileNode::tick()
     return BT::NodeStatus::SUCCESS;
 }
 
-} // namespace robl_behavior_tree
+} // namespace robl_behaviortree
